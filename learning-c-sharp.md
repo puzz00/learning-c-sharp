@@ -294,3 +294,127 @@ else{
 
 >[!IMPORTANT]
 >We cannot bubble down so variables defined with local scope to *inner* code blocks cannot be accessed by *outer* code blocks
+
+### Methods
+
+Methods are blocks of code which we can call again and again once we have defined them - they help us make sure our code is concise and less prone to bugs.
+
+#### Void Methods
+
+Void methods do not *return* any values - we need to specify them using the `void` keyword before the name of the method.
+
+In this example the `greeting` method saves us from writing the same lines of code over and over again.
+
+Since it just prints output to the console we specify it is `void`
+
+We *call* methods to get them to execute - we use the name of the method along with `()` to call them.
+
+```csharp=
+void Greeting() // void because nothing is returned
+{
+    System.Console.WriteLine("Hello - what a great day it is!");
+}
+
+System.Console.WriteLine("What is your name? ");
+string userName = Console.ReadLine();
+if(userName == "dave")
+{
+    Greeting(); // calling the Greeting method
+}
+else if(userName == "sarah")
+{
+    Greeting(); // calling the Greeting method
+}
+else if(userName == "billybob")
+{
+    Greeting(); // calling the Greeting method
+}
+else{
+    System.Console.WriteLine("Goodbye!");
+}
+```
+
+>[!TIP]
+>Use *PascalCase* in which all first letters of all words are *upper case* when naming *methods* in C#
+
+##### Arguments and Parameters
+
+We can pass data into methods to make the method act differently or give different output - we call the data we pass *arguments* - we specify these *arguments* in the `()` when we call the method.
+
+When we define a method which needs to accept data we make a space for the data to be recieved - this is essentialy a varaible which will be used by the method - we call these spaces *parameters*
+
+Essentialy we pass data to method *paramaters* as *arguments*.
+
+![13](/images/13.png)
+
+>[!IMPORTANT]
+>We need to make sure the *datatype* of an argument matches that specified as the parameter it is being passed to
+
+#### Non Void Methods
+
+If a method *returns* a value we need to specify which datatype will be returned - we do this infront of the name of the method where before we used `void`
+
+```csharp=
+int addNums(int x, int y) // returns an int so we specify this
+{
+    return x + y; // return key word returns an int
+}
+
+int smallSum = addNums(2, 8);
+int midSum = addNums(23, 82);
+int largeSum = addNums(288, 343);
+
+System.Console.WriteLine(smallSum);
+System.Console.WriteLine(midSum);
+System.Console.WriteLine(largeSum);
+```
+
+If we have specified that a method will return a value we must make sure all paths return a value - this is important if we start to use flow control.
+
+```csharp=
+int addNums(int x, int y) // returns an int so we specify this
+{
+    if(x + y >= 100)
+    {
+        System.Console.WriteLine("Ton Up");
+        return x + y; // return key word returns an int
+    }
+    return x + y; // needed so all paths return an int
+}
+
+int smallSum = addNums(2, 8);
+int midSum = addNums(23, 82);
+int largeSum = addNums(288, 343);
+
+System.Console.WriteLine(smallSum);
+System.Console.WriteLine(midSum);
+System.Console.WriteLine(largeSum);
+```
+
+>[!IMPORTANT]
+>We must ensure we return the same datatype as we specify as the return datatype in the method declaration
+
+#### Static Typing vs Dynamic Typing
+
+C# is a *static* typed language - this is why we need to ensure that datatypes match.
+
+In a *static* typed language we cannot assign a datatype to a variable which does not match its original datatype. For example a variable declared `string userAge = "10";` cannot later have any other kind of datatype assigned to it - `userAge = 11;` will not work but `userAge = "11";` will work.
+
+>[!NOTE]
+>Dynamically typed languages such as python do allow different datatypes to be assigned to variables - `user_age = "10"` in python can be followed later with `user_age = 11` if wanted
+
+An advantage of using a *static* typed language such as C# is that *type errors* are picked up during compilation so we dont have them during runtime.
+
+A disadvantage of using a *static* typed language such as C# is that it makes it less flexible when programing with it.
+
+#### int.Parse() Method
+
+We can use the `int.Parse()` method to *parse* a *string* datatype into an *integer* datatype - this is useful when working with user supplied input as the `ReadLine()` method always returns a *string* even though we might want an *integer* to work with.
+
+```csharp=
+System.Console.WriteLine("Enter your age: ");
+string userAge = Console.ReadLine(); // returns a string
+int age = int.Parse(userAge); // we parse the string to be an int
+int catAge = age * 7; // we can now work with the data mathematically
+System.Console.WriteLine("As a cat you are: " + catAge);
+```
