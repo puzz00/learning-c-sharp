@@ -251,3 +251,46 @@ else {
 }
 ```
 
+### Code Blocks and Local Scope
+
+The `{}` used in C# shows us a *code block*
+
+When we are working with flow control we can see that the `if` statement has a *code block* which belongs to it - this is the code which will execute if the statement given is `true`
+
+We can see that `if else` and `else` have their own code blocks.
+
+This introduces us to the *scope* of variables - this essentialy determines where variables can be accessed in our code.
+
+If we declare a variable inside a code block it will be *locally scoped* to that block - we will not be able to access it from other areas outside of that block.
+
+![11](/images/11.png)
+
+If we have declared a variable in a code block which itself has a code block or code blocks inside it, we can access that variable from the inner blocks since the blocks are in the scope of the outer block - a way we can picture this is if the variable does not exist in the namespace of an inner block then the program will bubble up and up and keep checking until it finds the variable.
+
+![12](/images/12.png)
+
+```csharp=
+string userName = Console.ReadLine();
+if(userName == "dduck")
+{
+    System.Console.WriteLine("Hello, " + userName);
+    int userAge = 82;
+    System.Console.WriteLine("You are: " + userAge); // we can use userAge here
+    if(userAge > 70)
+    {
+        // we enter an inner code block
+        System.Console.WriteLine(userName); // can bubble up to get userName
+        System.Console.WriteLine("is " + userAge); //can bubble up to outer code block to get userAge
+    }
+}
+else if(userName == "bbunny")
+{
+    System.Console.WriteLine("Whats up " + userName); // we can access userName but not userAge
+}
+else{
+    System.Console.WriteLine("Goodbye!" + userName);
+}
+```
+
+>[!IMPORTANT]
+>We cannot bubble down so variables defined with local scope to *inner* code blocks cannot be accessed by *outer* code blocks
