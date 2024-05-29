@@ -310,6 +310,74 @@ else{
 >[!IMPORTANT]
 >We cannot bubble down so variables defined with local scope to *inner* code blocks cannot be accessed by *outer* code blocks
 
+### Switch Statements
+
+We can use *switch statements* for flow control in C# - this is similar to javascript.
+
+Using `switch` can make it easier to write and understand code in some situations such as we are checking one value against multiple possible values.
+
+We put the condition we are checking in the `()` of the `switch` statment and then we check this against a number of `case` statements.
+
+The last statement is `default` - this is similar to the `else` statement and will execute if no other cases are true.
+
+```csharp=
+// switch
+int day = 3;
+switch(day)
+{
+    case 1:
+        System.Console.WriteLine("Monday");
+        break;
+    case 2:
+        System.Console.WriteLine("Tuesday");
+        break;
+    case 3:
+        System.Console.WriteLine("Wednesday");
+        break;
+    case 4:
+        System.Console.WriteLine("Thursday");
+        break;
+    case 5:
+        System.Console.WriteLine("Friday");
+        break;
+    case 6:
+        System.Console.WriteLine("Saturday");
+        break;
+    case 7:
+        System.Console.WriteLine("Sunday");
+        break;
+    default:
+        System.Console.WriteLine("Not a day of the week on planet Earth");
+        break;
+}
+```
+
+We will get every value after a match has been found unless we use a `break` keyword. This is because once one case has been matched all the other cases are not checked - they just execute.
+
+This feature is there because sometimes more than one case will lead to the same code being wanted. We can put these cases together and use breaks elsewhere.
+
+```csharp=
+// why we use break
+string color = "orange";
+
+switch(color)
+{
+    case "blue":
+    case "red":
+    case "yellow":
+        System.Console.WriteLine("Primary Color.");
+        break;
+    case "green":
+    case "orange":
+    case "purple":
+        System.Console.WriteLine("Secondary Color.");
+        break;
+    default:
+        System.Console.WriteLine("Not a Primary or Secondary Colour.");
+        break;
+}
+```
+
 ### Methods
 
 Methods are blocks of code which we can call again and again once we have defined them - they help us make sure our code is concise and less prone to bugs.
@@ -408,6 +476,39 @@ System.Console.WriteLine(largeSum);
 
 >[!IMPORTANT]
 >We must ensure we return the same datatype as we specify as the return datatype in the method declaration
+
+#### Returning from Switch Statements
+
+If we use a `switch` statement inside a method we can just return values directly from it.
+
+```csharp=
+char ScoreToGrade(int score)
+{
+    switch(score)
+    {
+        case 5:
+            return 'A';
+        case 4:
+            return 'B';
+        case 3:
+            return 'C';
+        case 2:
+        case 1:
+            return 'U';
+        case 0:
+            return '?';
+        default:
+            return '!';
+    }
+}
+
+int pupilScore = 3;
+char pupilGrade = ScoreToGrade(pupilScore);
+System.Console.WriteLine($"You got: {pupilGrade}");
+```
+
+>[!NOTE]
+>We do not need to use `break` if we are using `return` in a `case`
 
 #### Static Typing vs Dynamic Typing
 
