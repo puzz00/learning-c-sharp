@@ -148,6 +148,21 @@ Console.WriteLine(quotient);
 
 We can use *unary operators* such as `++` and `--` in C#
 
+### String Interpolation
+
+We can *interpolate* strings just as we can in other languages such as python and javascript.
+
+The syntax for this in C# is we put `$` before the string and just like with an *f string* in python we use `{}` to place variables or expressions into.
+
+Using *string interpolation* is a better way most of the time to embed variables or expressions into strings.
+
+```csharp=
+string animal = "cat";
+int lives = 9;
+System.Console.WriteLine($"The {animal} has got {lives} lives.");
+System.Console.WriteLine($"{lives} + {lives} = {lives * 2}");
+```
+
 ### User Input
 
 We can get user input by using the `ReadLine()` method from the `Console` class - it always returns a `string` datatype.
